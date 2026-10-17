@@ -4,6 +4,3 @@ nodes:
   - role: control-plane
   - role: worker
   - role: worker
-
-  kind create cluster --name llm --config cluster/kind-config.yaml
-  kubectl get nodes
