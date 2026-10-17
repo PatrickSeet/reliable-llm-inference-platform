@@ -1,6 +1,11 @@
 # client/smoke.py
 import os
 from openai import OpenAI
+from traceloop.sdk import Traceloop
+
+# Sends spans to TRACELOOP_BASE_URL (Phoenix). disable_batch sends each span
+# immediately, so this short script doesn't exit before its spans are sent.     
+Traceloop.init(app_name="smoke-client", disable_batch=True)
 
 client = OpenAI(base_url=os.getenv("LLM_BASE_URL", "http://localhost:8000/v1"),
                 api_key="dummy")
