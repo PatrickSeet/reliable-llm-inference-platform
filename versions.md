@@ -1,0 +1,1 @@
+The simulator image ghcr.io/llm-d/llm-d-inference-sim:v0.9.0, run with --model sim-model --mode echo

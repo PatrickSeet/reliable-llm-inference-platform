@@ -1,0 +1,1 @@
+A real Hugging Face model name makes the simulator call a render server on port 8082 for tokenization. I used a dummy model name to get the built-in tokenizer.” Small findings like this are good interview material.
