@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: llm
+  namespace: default
+  labels:
+    app: llm
+    release: mon          # must match your Helm release name (see below)
+spec:
+  selector:
+    matchLabels: {app: llm}        # finds your Service by its label
+  namespaceSelector:
+    matchNames: [default]
+  endpoints:
+    - port: http                   # the named port in service.yaml
+      path: /metrics
+      interval: 15s
