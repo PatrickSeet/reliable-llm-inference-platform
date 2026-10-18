@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: llm-recording-rules
+  namespace: default
+  labels:
+    release: mon            # same selection rule as the ServiceMonitor
+spec:
+  groups:
+    - name: llm.cost
+      interval: 30s
+      rules:
+        # ASSUMPTION: hourly price of the serving node in USD.
+        # The simulator runs on a laptop, so this is a placeholder; set it to
+        # the real GPU instance price when you swap to vLLM.
+        - record: llm:node_hourly_cost_usd
+          expr: vector(0.80)
+
+        - record: llm:generation_tokens:rate5m
+          expr: sum(rate(vllm:generation_tokens_total[5m]))
+
+        - record: llm:prompt_tokens:rate5m
+          expr: sum(rate(vllm:prompt_tokens_total[5m]))
+
+        - record: llm:requests:rate5m
+          expr: sum(rate(vllm:request_success_total[5m]))
+
+        # cost per 1K output tokens = (price per second / output tokens per second) x 1000
+        # "> 0" avoids dividing by zero when there's no traffic
+        - record: llm:cost_per_1k_output_tokens_usd
+          expr: |
+            (scalar(llm:node_hourly_cost_usd) / 3600)
+              / (llm:generation_tokens:rate5m > 0) * 1000
