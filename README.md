@@ -1,6 +1,6 @@
 # Reliable LLM Inference Platform
 
-An OpenAI-compatible LLM serving platform on Kubernetes with production-grade
+An OpenAI-compatible LLM serving platform on Kubernetes with production-style
 observability, SLOs, eval-gated canary releases with automatic rollback, and
 documented failure experiments with a postmortem.
 
@@ -54,8 +54,8 @@ at http://localhost:3000.
 
 ## Measurements
 
-Time from pod creation to Ready, simulator on kind (laptop), measured with
-`scripts/time_to_ready.py`. Timestamps have 1-second resolution.
+Time from pod creation to Ready, SIMULATOR on kind (laptop), measured with
+`scripts/time_to_ready.py`. Timestamps have 1-second resolution. This serves as the baseline for Stage 3 vLLM for comparison 
 
 | Start type | Total | Image pull | Notes |
 |---|---|---|---|

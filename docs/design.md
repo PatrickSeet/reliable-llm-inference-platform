@@ -75,7 +75,7 @@ starts in seconds and loads no model.
 server answers correctly; acceptable for a simulator with no warm-up.
 Measured time to Ready on the simulator: cold 14s (including a 3s image
 pull), warm 11s; about 10s of each is readiness-probe timing (5s initial
-delay + 10s period), not application startup. See README "Measurements". (`scripts/time_to_ready.py`).
+delay + 10s period), not application startup. This is only for comparison in Stage 3 vLLM. See README "Measurements". (`scripts/time_to_ready.py`).
 
 **Planned for vLLM:** startup takes minutes (image pull, weight download,
 GPU load, warm-up). Use a `startupProbe` on `/health` sized from measured
